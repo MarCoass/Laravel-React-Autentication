@@ -2,8 +2,10 @@ import { Link, Route, Routes } from "react-router-dom";
 import Home from "./components/Home";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import useAuthContext from "./context/AuthContext";
 
 function App() {
+  const { user, logout } = useAuthContext();
   return (
     <div className="max-w-6xl mx-auto">
       <nav className="container mx-auto flex flex-wrap items-center justify-between">
@@ -17,22 +19,37 @@ function App() {
                 Home
               </Link>
             </li>
-            <li>
-              <Link
-                to="/login"
-                className="block rounded py-2 pr-4 pl-3 text-black"
-              >
-                Login
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/register"
-                className="block rounded py-2 pr-4 pl-3 text-black"
-              >
-                Register
-              </Link>
-            </li>
+            {user ? (
+              <>
+                <li>
+                  <button
+                    onClick={logout}
+                    className="block rounded py-2 pr-4 pl-3 text-black"
+                  >
+                    Log out
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to="/login"
+                    className="block rounded py-2 pr-4 pl-3 text-black"
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/register"
+                    className="block rounded py-2 pr-4 pl-3 text-black"
+                  >
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>

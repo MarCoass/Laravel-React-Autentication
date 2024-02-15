@@ -1,46 +1,15 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import axios from "../api/axios";
+import { Link } from "react-router-dom";
+import useAuthContext from "../context/AuthContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const navigate = useNavigate();
+  const { login, errors } = useAuthContext();
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    try {
-      // Obtener la cookie CSRF
-      await axios.get("/sanctum/csrf-cookie");
-
-      // Realizar la solicitud de inicio de sesión
-      const response = await axios.post("/login", { email, password });
-
-      // Limpiar los errores
-      setEmailError("");
-      setPasswordError("");
-
-      // Verificar si hay errores en la respuesta del servidor
-      if (response.data.errors) {
-        // Mostrar mensajes de error según la respuesta del servidor
-        if (response.data.errors.email) {
-          setEmailError(response.data.errors.email[0]);
-        }
-        if (response.data.errors.password) {
-          setPasswordError(response.data.errors.password[0]);
-        }
-      } else {
-        // Si no hay errores, realizar la redirección
-        setEmail("");
-        setPassword("");
-        console.log(response)
-        navigate("/");
-      }
-    } catch (e) {
-      console.log(e);
-    }
+    login({email, password});
   };
 
   return (
@@ -58,12 +27,15 @@ const Login = () => {
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
-                      setEmailError(""); // Limpiar el error al cambiar el valor
                     }}
                   ></input>
-                  <div className="flex">
-                    <span className="text-red-400 text-sm m-2 p-2">{emailError}</span>
-                  </div>
+                  {errors.email && (
+                    <div className="flex">
+                      <span className="text-red-400 text-sm m-2 p-2">
+                        {errors.email[0]}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 <div className="mb-6">
                   <input
@@ -72,12 +44,15 @@ const Login = () => {
                     value={password}
                     onChange={(e) => {
                       setPassword(e.target.value);
-                      setPasswordError(""); // Limpiar el error al cambiar el valor
                     }}
                   ></input>
-                  <div className="flex">
-                    <span className="text-red-400 text-sm m-2 p-2">{passwordError}</span>
-                  </div>
+                  {errors.password && (
+                    <div className="flex">
+                      <span className="text-red-400 text-sm m-2 p-2">
+                        {errors.password[0]}
+                      </span>
+                    </div>
+                  )}
                 </div>
                 <div className="mb-10">
                   <button

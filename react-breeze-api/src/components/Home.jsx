@@ -1,9 +1,15 @@
-
+import { useEffect } from "react";
+import useAuthContext from "../context/AuthContext";
 
 const Home = () => {
-    return (
-        <div>Home</div>
-    )
-}
+  const { user, getUser } = useAuthContext();
+  useEffect(() => {
+    if (!user) {
+      getUser();
+    }
+  }, []);
 
-export default Home
+  return <div>{user?.name}</div>;
+};
+
+export default Home;
