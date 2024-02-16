@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import axios from "../api/axios";
 import { useNavigate } from "react-router-dom";
 
@@ -20,11 +20,11 @@ export const AuthProvider = ({ children }) => {
   const login = async ({ email, password }) => {
     await csrf();
     try {
-      
       await axios.post("/login", { email, password });
       await getUser();
       navigate("/");
     } catch (error) {
+      console.error("Error during login:", error);
       if (error.response.status === 422) {
         setErrors(error.response.data.errors);
       }
@@ -56,6 +56,12 @@ export const AuthProvider = ({ children }) => {
       setUser(null)
     })
   }
+
+  useEffect(() => {
+    if (!user) {
+      getUser();
+    }
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, errors, getUser, login, register, logout }}>
