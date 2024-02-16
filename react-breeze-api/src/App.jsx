@@ -2,9 +2,10 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
 import AuthLayout from "./layouts/AuthLayout";
 import GuestLayout from "./layouts/GuestLayouts";
+import ResetPassword from "./pages/ResetPassword";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
           <Route element={<GuestLayout></GuestLayout>}>
             <Route path="/Login" element={<Login></Login>}></Route>
             <Route path="/register" element={<Register></Register>}></Route>
+            <Route path="/forgot-password" element={<ForgotPassword></ForgotPassword>}></Route>
+            <Route path="/password-reset/:token" element={<ResetPassword></ResetPassword>}></Route>
           </Route>
         </Routes>
       </div>
