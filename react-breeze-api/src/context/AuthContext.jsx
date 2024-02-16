@@ -13,9 +13,20 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const getUser = async () => {
-    const { data } = await axios.get("/api/user");
-    setUser(data);
+    try {
+      const { data } = await axios.get("/api/user");
+      setUser(data);
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        console.log("La sesión no está iniciada.");
+      } else {
+        console.error("Error al obtener el usuario:", error);
+      }
+    }
   };
+  
+  
+  
 
   const login = async ({ email, password }) => {
     await csrf();
