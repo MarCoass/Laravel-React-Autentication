@@ -9,72 +9,70 @@ const Login = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    login({email, password});
+    login({ email, password });
   };
 
   return (
     <section className="py-20 lg:py-[120px]">
-      <div className="container mx-auto">
-        <div className="mx-4 flex flex-wrap">
-          <div className="w-full px-4">
-            <div className="relative mx-auto max-w-[525px] overflow-hidden ">
-              <div className="mb-10 text-center md:mb-16">Login</div>
-              <form onSubmit={handleLogin}>
-                <div className="mb-6">
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => {
-                      setEmail(e.target.value);
-                    }}
-                  ></input>
-                  {errors.email && (
-                    <div className="flex">
-                      <span className="text-red-400 text-sm m-2 p-2">
+      <div className="container mx-auto  ">
+        <div className="mx-4 flex flex-wrap  ">
+          <div className="w-full px-4 ">
+            <div className="card w-96 bg-neutral-content text-primary-content ">
+              <div className="card-body">
+                <div className="text-5xl card-title">Iniciar sesión</div>
+                <form onSubmit={handleLogin} >
+                  <div className="m-6 flex flex-col">
+                    <span className="text-xl">Email</span>
+                    <input
+                      className="input input-bordered w-full max-w-xs"
+                      type="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => {
+                        setEmail(e.target.value);
+                      }}
+                    ></input>
+                    {errors.email && (
+                      <span className="alert alert-error text-sm p-2">
                         {errors.email[0]}
                       </span>
-                    </div>
-                  )}
-                </div>
-                <div className="mb-6">
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                  ></input>
-                  {errors.password && (
-                    <div className="flex">
-                      <span className="text-red-400 text-sm m-2 p-2">
+                    )}
+                  </div>
+                  <div className="m-6 flex flex-col">
+                    <span className=" text-xl">Contraseña</span>
+                    <input
+                      className="input input-bordered w-full max-w-xs"
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    ></input>
+                    {errors.password && (
+                      <span className="alert alert-error text-sm p-2">
                         {errors.password[0]}
                       </span>
-                    </div>
-                  )}
-                </div>
-                <div className="mb-10">
-                  <button
-                    type="submit"
-                    className="w-full px-4 py-3 bg-indigo-500 hover:bg-indigo-700 rounded-md text-white"
+                    )}
+                  </div>
+                  <div className="card-actions justify-end">
+                    <button type="submit" className="btn btn-primary">
+                      Login
+                    </button>
+                  </div>
+                </form>
+                <div className="card-footer">
+                  <Link
+                    to="/forgot-password"
+                    className="mx-5 inline-block text-base text-primary hover:underline"
                   >
-                    Login
-                  </button>
-                </div>
-              </form>
-              <Link
-                to="/forgot-password"
-                className="mb-2 inline-block text-base text-gray-500 hover:underline"
-              >
-                Forgot Password?
-              </Link>
-              <p className="text-base text-gray-500">
-                Not a member yet?
-                <Link to="/register" className="text-primary hover:underline">
-                  Register
-                </Link>{" "}
-              </p>
+                    Resetear contraseña.
+                  </Link>
+                  <Link to="/register" className="text-primary hover:underline">
+                    Registrarme
+                  </Link>
+                </div>{" "}
+              </div>
             </div>
           </div>
         </div>

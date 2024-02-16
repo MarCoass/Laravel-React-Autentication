@@ -43,52 +43,54 @@ const ResetPassword = () => {
       <div className="container mx-auto">
         <div className="mx-4 flex flex-wrap">
           <div className="w-full px-4">
-            <div className="relative mx-auto max-w-[525px] overflow-hidden ">
-              {status && (
-                <div className="bg-green-700 m-2 p-2 rounded text-white">
+            <div className="card w-96 bg-neutral-content text-primary-content ">
+              <div className="card-body">
+              
+                <div className="text-4xl card-title">Resetear contraseña</div>
+                <form onClick={handleSubmit}>
+                  <div className="mb-6">
+                    <input
+                      className="input input-bordered w-full max-w-xs"
+                      type="password"
+                      placeholder="Contraseña"
+                      value={password}
+                      onChange={(e) => {
+                        setPassword(e.target.value);
+                      }}
+                    ></input>
+                    {errors.password && (
+                        <span className="alert alert-error text-sm p-2">
+                          {errors.password[0]}
+                        </span>
+                    )}
+                  </div>
+                  <div className="mb-6">
+                    <input
+                      className="input input-bordered w-full max-w-xs"
+                      type="password"
+                      placeholder="Confirmacion de la contraseña"
+                      value={password_confirmation}
+                      onChange={(e) => {
+                        setPasswordConfirm(e.target.value);
+                      }}
+                    ></input>
+                  </div>
+
+                  <div className="card-actions justify-end">
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                    >
+                      Enviar contraseña
+                    </button>
+                  </div>
+                </form>
+                {status && (
+                <div className="alert alert-success">
                   {status}
-                  <Link to='/login'>Log in</Link>
                 </div>
               )}
-              <div className="mb-10 text-center md:mb-16">Reset password</div>
-              <form onClick={handleSubmit}>
-                <div className="mb-6">
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => {
-                      setPassword(e.target.value);
-                    }}
-                  ></input>
-                  {errors.password && (
-                    <div className="flex">
-                      <span className="text-red-400 text-sm m-2 p-2">
-                        {errors.password[0]}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                <div className="mb-6">
-                  <input
-                    type="password"
-                    placeholder="Password confirmation"
-                    value={password_confirmation}
-                    onChange={(e) => {
-                      setPasswordConfirm(e.target.value);
-                    }}
-                  ></input>
-                </div>
-
-                <div className="mb-10">
-                  <button
-                    type="submit"
-                    className="w-full px-4 py-3 bg-indigo-500 hover:bg-indigo-700 rounded-md text-white"
-                  >
-                    Send Password
-                  </button>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
