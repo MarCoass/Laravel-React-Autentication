@@ -14,10 +14,8 @@ const Register = () => {
   };
 
   return (
-    <section className="py-20 lg:py-[120px]">
-      <div className="container mx-auto">
-        <div className="mx-4 flex flex-wrap">
-          <div className="w-full px-4">
+    <section className="container mx-auto w-min py-20">
+      
             <div className="card w-96 bg-neutral-content text-primary-content ">
               <div className="card-body">
                 <div className="text-5xl card-title">Registrarse</div>
@@ -95,9 +93,7 @@ const Register = () => {
                 </form>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          
     </section>
   );
 };

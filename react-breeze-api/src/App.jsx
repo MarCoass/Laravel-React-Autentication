@@ -9,9 +9,8 @@ import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
-    <div className="max-w-6xl mx-auto">
-      
-      <div>
+    <div className="max-w-6xl mx-auto min-h-screen">
+      <div >
         <Routes>
           <Route element={<AuthLayout></AuthLayout>}>
             <Route path="/" element={<Home></Home>}></Route>
@@ -24,6 +23,7 @@ function App() {
           </Route>
         </Routes>
       </div>
+      
     </div>
   );
 }
