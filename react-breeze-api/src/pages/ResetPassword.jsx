@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useAuthContext from "../context/AuthContext";
 import axios from "../api/axios";
-import { useParams, useSearchParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
@@ -47,6 +47,7 @@ const ResetPassword = () => {
               {status && (
                 <div className="bg-green-700 m-2 p-2 rounded text-white">
                   {status}
+                  <Link to='/login'>Log in</Link>
                 </div>
               )}
               <div className="mb-10 text-center md:mb-16">Reset password</div>
